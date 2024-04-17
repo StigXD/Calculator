@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,9 +131,9 @@
     <ClCompile Include="Calculator_Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Calculations.h" />
     <ClInclude Include="Enter task.h" />
-    <ClInclude Include="Menu.h" />
-    <ClInclude Include="String to double.h" />
+    <ClInclude Include="Example.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,8 +5,10 @@
 #include <vector>
 #include <span>
 #include <Windows.h>
-#include "Menu.h"
+#include "Enter task.h"
+#include "Calculations.h"
 using namespace std;
+
 
 void main()
 {
@@ -15,7 +17,13 @@ void main()
 
 	cout << "|		Калькулятор		|" << endl;
 
-	Menu();
+
+	//while (true)
+	//{
+		EnterTask();
+	//	Calculations(stackValue, stackOperation, symbol);
+	//	cout << "Ответ =>" << stackValue.top().value << endl;
+	//}
 
 	system("pause");
 
