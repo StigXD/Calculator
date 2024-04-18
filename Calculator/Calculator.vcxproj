@@ -131,9 +131,9 @@
     <ClCompile Include="Calculator_Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Answer.h" />
     <ClInclude Include="Calculations.h" />
     <ClInclude Include="Enter task.h" />
-    <ClInclude Include="Example.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

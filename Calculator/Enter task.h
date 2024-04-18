@@ -5,51 +5,13 @@
 #include <string>
 #include <Windows.h>
 #include <stack>
-//#include "Calculations.h"
-
+#include "Calculations.h"
 
 using namespace std;
 
-struct Symbol
+void EnterTask(stack <Symbol>& stackValue, stack <Symbol>& stackOperation, Symbol& symbol)
 {
-	char type;
-	double value;
-};
-
-void Calculations(stack <Symbol>& stackValue, stack <Symbol>& stackOperation, Symbol& symbol)
-{
-	double x, y;
-	x = stackValue.top().value;
-	stackValue.pop();
-
-	switch (stackOperation.top().type)
-	{
-	case '+':
-	{
-		y = stackValue.top().value;
-		stackValue.pop();
-		symbol.value = x + y;
-		symbol.type = '0';
-		stackValue.push(symbol);
-		break;
-	}
-	//case '-':
-	//case '*':
-	//case '/':
-	}
-
-}
-
-void EnterTask()
-{
-	cout << "Введите арифметическое выражение" << endl;
-	cout << "Допустимый синтаксис выражения: (), +, -, *, /." << endl;
-
 	char charSymbol;
-
-	Symbol symbol;
-	stack<Symbol>stackValue;
-	stack<Symbol>stackOperation;
 
 	do
 	{
@@ -65,16 +27,12 @@ void EnterTask()
 		if (charSymbol == '+' || charSymbol == '-' || charSymbol == '*' || charSymbol == '/')
 		{
 			symbol.type = charSymbol;
-			symbol.type = 0;
+			symbol.value = 0;
 			stackOperation.push(symbol);
 			cin.ignore();
 			continue;
 		}
-	} while (charSymbol == '\n');
-
-	Calculations(stackValue, stackOperation, symbol);
-
-	cout << "Ответ =>" << stackValue.top().value << endl;
+	} while (charSymbol != '\n');
 
 	return;
 }

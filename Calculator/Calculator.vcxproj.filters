@@ -23,10 +23,10 @@
     <ClInclude Include="Enter task.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Example.h">
+    <ClInclude Include="Calculations.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Calculations.h">
+    <ClInclude Include="Answer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
