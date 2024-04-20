@@ -5,32 +5,75 @@
 #include <string>
 #include <Windows.h>
 #include <stack>
+#include "OperationPriority.h"
 #include "Calculations.h"
-
 using namespace std;
 
 void EnterTask(stack <Symbol>& stackValue, stack <Symbol>& stackOperation, Symbol& symbol)
 {
 	char charSymbol;
-
+	bool isNegative = true;
 	do
 	{
 		charSymbol = cin.peek();
 
-		if (charSymbol >= '0' && charSymbol <= '9')
+		if (charSymbol >= '0' && charSymbol <= '9'|| charSymbol == '-' && isNegative)
 		{
 			cin >> symbol.value;
 			symbol.type = '0';
 			stackValue.push(symbol);
+			isNegative = false;
 			continue;
 		}
-		if (charSymbol == '+' || charSymbol == '-' || charSymbol == '*' || charSymbol == '/')
+		if (charSymbol == '+' || charSymbol == '-' && !isNegative || charSymbol == '*' || charSymbol == '/')
+		{
+			if (stackOperation.size()==0)
+			{
+				symbol.type = charSymbol;
+				symbol.value = 0;
+				stackOperation.push(symbol);
+				cin.ignore();
+				continue;
+			}
+			if (stackOperation.size() != 0 && GetPriority(charSymbol)>GetPriority(stackOperation.top().type))
+			{
+				symbol.type = charSymbol;
+				symbol.value = 0;
+				stackOperation.push(symbol);
+				cin.ignore();
+				continue;
+			}
+			if (stackOperation.size() != 0 && GetPriority(charSymbol) <= GetPriority(stackOperation.top().type))
+			{
+				if (!Calculations(stackValue, stackOperation, symbol))
+					break;
+				continue;
+			}
+		}
+		if (charSymbol == '(')
 		{
 			symbol.type = charSymbol;
 			symbol.value = 0;
 			stackOperation.push(symbol);
 			cin.ignore();
 			continue;
+		}
+		if (charSymbol == ')')
+		{
+			while (stackOperation.top().type != '(')
+			{
+				if (!Calculations(stackValue, stackOperation, symbol))
+					break;
+				continue;
+			}
+			stackOperation.pop();
+			cin.ignore();
+			continue;
+		}
+		else
+		{
+			cout << "Неверное выражение!" << endl;
+			return;
 		}
 	} while (charSymbol != '\n');
 

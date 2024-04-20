@@ -35,19 +35,23 @@ void main()
 
 	while (true)
 	{
-		cout << "|		ÐšÐ°Ð»ÑŒÐºÑƒÐ»ÑÑ‚Ð¾Ñ€		|" << endl;
-		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð°Ñ€Ð¸Ñ„Ð¼ÐµÑ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ Ð²Ñ‹Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ" << endl;
-		cout << "Ð”Ð¾Ð¿ÑƒÑÑ‚Ð¸Ð¼Ñ‹Ð¹ ÑÐ¸Ð½Ñ‚Ð°ÐºÑÐ¸Ñ Ð²Ñ‹Ñ€Ð°Ð¶ÐµÐ½Ð¸Ñ: (), +, -, *, /." << endl;
+		cout << "|		Êàëüêóëÿòîð		|" << endl;
+		cout << "Äîïóñòèìûé ñèíòàêñèñ âûðàæåíèÿ: +, -, *, /, ()." << endl;
+		cout << "Ââåäèòå àðèôìåòè÷åñêîå âûðàæåíèå (äëÿ âûõîäà ââåäèòå '0')" << endl;
 
 		EnterTask(stackValue, stackOperation, symbol);
-		Calculations(stackValue, stackOperation, symbol);
-		Answer(stackValue);
+	while(stackOperation.size() !=0)
+	{
+		if (!Calculations(stackValue, stackOperation, symbol))
+			break;
+	}
+	Answer(stackValue);
 
 		char enterChoice;
-		cout << "Ð’Ñ‹Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÑŒ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰ÑƒÑŽ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸ÑŽ?" << endl
+		cout << "Âûïîëíèòü ñëåäóþùóþ îïåðàöèþ?" << endl
 			<< "Y/N =>";
 		cin >> enterChoice;
-		if (enterChoice == 'N' || enterChoice == 'n')
+		if (enterChoice == 'N' || enterChoice == 'n' || enterChoice == '0')
 			return;
 
 		//cin.sync();

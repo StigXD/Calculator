@@ -8,7 +8,7 @@
 
 using namespace std;
 
-void Calculations(stack <Symbol> &stackValue, stack <Symbol>& stackOperation, Symbol& symbol)
+bool Calculations(stack <Symbol> &stackValue, stack <Symbol>& stackOperation, Symbol& symbol)
 {
 	double x, y;
 	x = stackValue.top().value;
@@ -22,6 +22,7 @@ void Calculations(stack <Symbol> &stackValue, stack <Symbol>& stackOperation, Sy
 		symbol.value = x + y;
 		symbol.type = '0';
 		stackValue.push(symbol);
+		stackOperation.pop();
 		break;
 	case '-':
 		y = stackValue.top().value;
@@ -29,6 +30,7 @@ void Calculations(stack <Symbol> &stackValue, stack <Symbol>& stackOperation, Sy
 		symbol.value = y - x;
 		symbol.type = '0';
 		stackValue.push(symbol);
+		stackOperation.pop();
 		break;
 	case '*':
 		y = stackValue.top().value;
@@ -36,14 +38,27 @@ void Calculations(stack <Symbol> &stackValue, stack <Symbol>& stackOperation, Sy
 		symbol.value = x * y;
 		symbol.type = '0';
 		stackValue.push(symbol);
+		stackOperation.pop();
 		break;
 	case '/':
 		y = stackValue.top().value;
-		stackValue.pop();
-		symbol.value = y / x;
-		symbol.type = '0';
-		stackValue.push(symbol);
-		break;
+		if (x == 0)
+		{
+			cerr << "На 0 делить нельзя!" << endl;
+			return false;
+		}
+		else
+		{
+			stackValue.pop();
+			symbol.value = y / x;
+			symbol.type = '0';
+			stackValue.push(symbol);
+			stackOperation.pop();
+			break;
+		}
+	default:
+		cerr << "Не возможно выполнить операцию" << endl;
+		return false;
 	}
-
+	return true;
 }
