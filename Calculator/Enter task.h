@@ -13,10 +13,16 @@ void EnterTask(stack <Symbol>& stackValue, stack <Symbol>& stackOperation, Symbo
 {
 	char charSymbol;
 	bool isNegative = true;
-	do
+	while (true)
 	{
 		charSymbol = cin.peek();
-
+		if (charSymbol == '\n')
+			break;
+		if (charSymbol == ' ')
+		{
+			cin.ignore();
+			continue;
+		}
 		if (charSymbol >= '0' && charSymbol <= '9'|| charSymbol == '-' && isNegative)
 		{
 			cin >> symbol.value;
@@ -75,7 +81,7 @@ void EnterTask(stack <Symbol>& stackValue, stack <Symbol>& stackOperation, Symbo
 			cout << "Неверное выражение!" << endl;
 			return;
 		}
-	} while (charSymbol != '\n');
+	}
 
 	return;
 }
