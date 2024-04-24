@@ -26,10 +26,13 @@
     <ClInclude Include="Calculations.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Answer.h">
+    <ClInclude Include="Output answer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="OperationPriority.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Start menu.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

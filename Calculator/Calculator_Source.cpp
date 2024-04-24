@@ -5,6 +5,7 @@
 #include <vector>
 #include <span>
 #include <Windows.h>
+#include <limits>
 using namespace std;
 
 struct Symbol
@@ -13,16 +14,12 @@ struct Symbol
 	double value;
 };
 
+#include "Start menu.h"
 #include "Enter task.h"
 #include "Calculations.h"
-#include "Answer.h"
+#include "Output answer.h"
 
-inline void CinFlush()
-{
-	while (cin.get() != '\n') 
-		cin.ignore();
-	return;
-}
+#undef max
 
 void main()
 {
@@ -33,19 +30,21 @@ void main()
 	stack<Symbol>stackValue;
 	stack<Symbol>stackOperation;
 
-	while (true)
+	while (StartMenu())
 	{
-		cout << "|		Калькулятор		|" << endl;
-		cout << "Допустимый синтаксис выражения: +, -, *, /, ()." << endl;
-		cout << "Введите арифметическое выражение (для выхода введите '0')" << endl;
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
+		cout << "Введите арифметическую операцию:" << endl
+			<< "=> ";
+		
 		EnterTask(stackValue, stackOperation, symbol);
-	while(stackOperation.size() !=0)
-	{
-		if (!Calculations(stackValue, stackOperation, symbol))
-			break;
-	}
-	Answer(stackValue);
+		
+		while(stackOperation.size() !=0)
+		{
+			if (!Calculations(stackValue, stackOperation, symbol))
+				break;
+		}
+		Answer(stackValue);
 
 		char enterChoice;
 		cout << "Выполнить следующую операцию?" << endl
@@ -54,9 +53,7 @@ void main()
 		if (enterChoice == 'N' || enterChoice == 'n' || enterChoice == '0')
 			return;
 
-		//cin.sync();
-		//cin.ignore();
-		CinFlush();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		system("cls");
 	}
 	system("pause");
