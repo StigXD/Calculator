@@ -14,12 +14,12 @@ struct Symbol
 	double value;
 };
 
+#undef max
+
 #include "Start menu.h"
 #include "Enter task.h"
 #include "Calculations.h"
 #include "Output answer.h"
-
-#undef max
 
 void main()
 {
@@ -30,31 +30,50 @@ void main()
 	stack<Symbol>stackValue;
 	stack<Symbol>stackOperation;
 
+	char enterChoice;
+
 	while (StartMenu())
 	{
-		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-		cout << "Введите арифметическую операцию:" << endl
-			<< "=> ";
-		
-		EnterTask(stackValue, stackOperation, symbol);
-		
-		while(stackOperation.size() !=0)
+		while (true)
 		{
-			if (!Calculations(stackValue, stackOperation, symbol))
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			stackValue = stack<Symbol>();
+			stackOperation = stack<Symbol>();
+
+			cout << "Введите арифметическую операцию:" << endl
+				<< "=> ";
+
+			if (!EnterTask(stackValue, stackOperation, symbol))
+			{
+				cout << endl << "Выполнить следующую операцию?" << endl
+					<< "Y/N =>";
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				cin >> enterChoice;
+				if (enterChoice == 'N' || enterChoice == 'n' || enterChoice == '0')
+					break;
+				else
+				{
+					system("cls");
+					continue;
+				}
+			}
+
+			while (stackOperation.size() != 0)
+			{
+				if (!Calculations(stackValue, stackOperation, symbol))
+					break;
+			}
+			Answer(stackValue);
+
+			cout << "Выполнить следующую операцию?" << endl
+				<< "Y/N =>";
+			cin >> enterChoice;
+			if (enterChoice == 'N' || enterChoice == 'n' || enterChoice == '0')
 				break;
+
+			system("cls");
 		}
-		Answer(stackValue);
-
-		char enterChoice;
-		cout << "Выполнить следующую операцию?" << endl
-			<< "Y/N =>";
-		cin >> enterChoice;
-		if (enterChoice == 'N' || enterChoice == 'n' || enterChoice == '0')
-			return;
-
-		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		system("cls");
 	}
+
 	system("pause");
 }

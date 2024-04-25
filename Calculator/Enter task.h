@@ -9,10 +9,11 @@
 #include "Calculations.h"
 using namespace std;
 
-void EnterTask(stack <Symbol>& stackValue, stack <Symbol>& stackOperation, Symbol& symbol)
+bool EnterTask(stack <Symbol>& stackValue, stack <Symbol>& stackOperation, Symbol& symbol)
 {
 	char charSymbol;
 	bool isNegative = true;
+
 	while (true)
 	{
 		charSymbol = cin.peek();
@@ -41,7 +42,7 @@ void EnterTask(stack <Symbol>& stackValue, stack <Symbol>& stackOperation, Symbo
 				cin.ignore();
 				continue;
 			}
-			if (stackOperation.size() != 0 && GetPriority(charSymbol)>GetPriority(stackOperation.top().type))
+			if (stackValue.size() != 0 && stackOperation.size() != 0 && GetPriority(charSymbol)>GetPriority(stackOperation.top().type))
 			{
 				symbol.type = charSymbol;
 				symbol.value = 0;
@@ -49,7 +50,7 @@ void EnterTask(stack <Symbol>& stackValue, stack <Symbol>& stackOperation, Symbo
 				cin.ignore();
 				continue;
 			}
-			if (stackOperation.size() != 0 && GetPriority(charSymbol) <= GetPriority(stackOperation.top().type))
+			if (stackValue.size() != 0 && stackOperation.size() != 0 && GetPriority(charSymbol) <= GetPriority(stackOperation.top().type))
 			{
 				if (!Calculations(stackValue, stackOperation, symbol))
 					break;
@@ -62,6 +63,7 @@ void EnterTask(stack <Symbol>& stackValue, stack <Symbol>& stackOperation, Symbo
 			symbol.value = 0;
 			stackOperation.push(symbol);
 			cin.ignore();
+			isNegative = true;
 			continue;
 		}
 		if (charSymbol == ')')
@@ -79,9 +81,8 @@ void EnterTask(stack <Symbol>& stackValue, stack <Symbol>& stackOperation, Symbo
 		else
 		{
 			cout << "Неверное выражение!" << endl;
-			return;
+			return false;
 		}
 	}
-
-	return;
+	return true;
 }

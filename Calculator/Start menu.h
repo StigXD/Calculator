@@ -18,6 +18,7 @@ bool StartMenu()
 		cout << "|_______________________________________________|" << endl << endl;
 
 		int choice;
+		cout << "Выберите пункт меню:" << endl << "=> ";
 		cin >> choice;
 		switch (choice)
 		{
@@ -37,8 +38,7 @@ bool StartMenu()
 			break;
 		default:
 			cout << "Выберите один из пунктов меню" << endl;
-			system("pause");
-			system("cls");
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 		system("pause");
 		system("cls");

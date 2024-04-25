@@ -44,7 +44,7 @@ bool Calculations(stack <Symbol> &stackValue, stack <Symbol>& stackOperation, Sy
 		y = stackValue.top().value;
 		if (x == 0)
 		{
-			cerr << "На 0 делить нельзя!" << endl;
+			cout << "На 0 делить нельзя!" << endl;
 			return false;
 		}
 		else
@@ -57,7 +57,7 @@ bool Calculations(stack <Symbol> &stackValue, stack <Symbol>& stackOperation, Sy
 			break;
 		}
 	default:
-		cerr << "Не возможно выполнить операцию" << endl;
+		cout << "Невозможно выполнить операцию" << endl;
 		return false;
 	}
 	return true;
